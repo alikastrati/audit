@@ -1,8 +1,10 @@
 const express = require('express');
-
+const db = require('./models');
 const app = express();
 
 
-app.listen(3001, 'localhost', () => {
-    console.log('>Listening on port 3001')
+db.sequelize.sync().then(() => {
+  app.listen(3000, 'localhost', () => {
+    console.log(">Listening on PORT for requests");
+  })
 })

@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+.Blog{
+  background-color: black;
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -30,4 +32,52 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+.BLOG-title{
+  display: flex;
+  background-color: rgba(255, 166, 0, 0.879);
+  color: black;
+border-radius: 5px; 
+padding: 20px;
+margin: 2%;
+font-size: x-large;
+font-weight: 750;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+
+}
+.hash{
+  color: white;
+}
+
+.Pages{
+  display: flex;
+  flex-wrap: wrap-reverse;
+  flex-direction: row;
+  padding: 7px;
+  gap: 30px;
+  justify-content: center;
+}
+.card{
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.badge:hover{
+      background-color: black;
+      color: white;
+}
+.badge-secondary{
+  background-color: orange;
+  border-color: white;
+}
+.btnBlog{
+  background-color: black;
+}
+.dropdown-hover{
+  
+}
+btn m-1{
+  padding:10px;
 }

@@ -9,7 +9,8 @@ module.exports = {
     colors: {
       main: '#121212',
       secondary: '#FFFFFF',
-      action: '#FB8122'
+      action: '#FB8122',
+      dimmed: '#28282c'
     },
     
     extend: {

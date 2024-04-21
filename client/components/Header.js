@@ -1,10 +1,36 @@
 "use client";
+import {useEffect, useState} from "react";
 import Link from "next/link";
 
 export default function Header() {
+  const [userRole, setUserRole] = useState("");
+  
+  // Get User role from the JWT Token which holds the Users role
+  const getUserRole = () => {
+    const token = document.cookie.split(';').find(cookie => cookie.trim().startsWith('token='))?.split('=')[1];
+
+    if(token) {
+      try{
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+
+        const role = decodedToken.role;
+        setUserRole(role);
+      } catch(error) {
+        console.error('Error decoding JWT Token: ' , error);
+      }
+    }
+  }
+
+
+  useEffect(() => {
+    getUserRole();
+  }, [])
+  
+  
+  
   return (
     <>
-      
+
       <div className="navbar bg-main">
 
         {/* MAIN NAVBAR START  */}
@@ -14,7 +40,7 @@ export default function Header() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </div>
             <ul tabIndex={0} className="menu menu-sm bg-main dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            
+
               <li>
                 <Link href="/">Home</Link>
               </li>
@@ -22,7 +48,11 @@ export default function Header() {
               <li>
                 <Link href="/blog">Blog</Link>
               </li>
-              <li><a>Info</a></li>
+
+              {userRole === 'admin' && (
+                <li><a>Dashboard</a></li>
+              )}
+              
               <li><a>Contact</a></li>
             </ul>
           </div>
@@ -32,22 +62,31 @@ export default function Header() {
         {/* NAVBAR HAMBURGER MENU FOR SMALLER SCREENS  */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu bg-main menu-horizontal px-1">
-            
+
             <li>
-                <Link href="/">Home</Link>
+              <Link href="/">Home</Link>
             </li>
-           
+
             <li>
-                <Link href="/blog">Blog</Link>
-              </li>
-            <li><a>Info</a></li>
+              <Link href="/blog">Blog</Link>
+            </li>
+            
+            {userRole === 'admin' && (
+                <li><a>Dashboard</a></li>
+              )}
+
+
+            {userRole === 'user' && (
+                <li><a>Scan Log</a></li>
+              )}
             <li><a>Contact</a></li>
           </ul>
         </div>
 
         {/* NAVBAR END (RIGHT SIDE) */}
         <div className="navbar-end bg-main">
-          <div className="dropdown dropdown-end bg-main">
+          {userRole === 'admin' && (
+            <div className="dropdown dropdown-end bg-main">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -60,10 +99,61 @@ export default function Header() {
                   <span className="badge">New</span>
                 </a>
               </li>
-              <li><a>Settings</a></li>
+
+
+              {/* Temporary Solution  */}
+
+              {userRole === 'admin' && (
+                <li><a>Dashboard</a></li>
+              )}
               <li><a>Logout</a></li>
             </ul>
           </div>
+          )}
+
+
+
+        {userRole === '' && (
+            <div className="dropdown dropdown-end bg-main">
+              <Link href='/log-in'>
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
+            </div>
+              </Link>
+            
+            
+          </div>
+          )}
+
+
+
+
+
+        {userRole === 'user' && (
+            <div className="dropdown dropdown-end bg-main">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
+            </div>
+            <ul tabIndex={0} className="bg-main menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              <li>
+                <a className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </a>
+              </li>
+              {userRole === 'admin' && (
+                <li><a>Dashboard</a></li>
+              )}
+              <li><a>Logout</a></li>
+            </ul>
+            
+            
+          </div>
+          )}
         </div>
       </div>
     </>

@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import Link from "next/link";
 
 export default function Header() {
+  
   const [userRole, setUserRole] = useState("");
   
   // Get User role from the JWT Token which holds the Users role
@@ -39,7 +40,7 @@ export default function Header() {
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </div>
-            <ul tabIndex={0} className="menu menu-sm bg-main dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabIndex={0} className="menu menu-sm bg-main dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
 
               <li>
                 <Link href="/">Home</Link>
@@ -72,7 +73,12 @@ export default function Header() {
             </li>
             
             {userRole === 'admin' && (
-                <li><a>Dashboard</a></li>
+
+                <li>
+                  <Link href='/admin/dashboard'>
+                    Dashboard
+                  </Link>
+                </li>
               )}
 
 
@@ -104,7 +110,11 @@ export default function Header() {
               {/* Temporary Solution  */}
 
               {userRole === 'admin' && (
-                <li><a>Dashboard</a></li>
+                <li>
+                  <Link href='/admin/dashboard'>
+                    Dashboard
+                  </Link>
+                </li>
               )}
               <li><a>Logout</a></li>
             </ul>
@@ -138,16 +148,13 @@ export default function Header() {
                 <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
               </div>
             </div>
-            <ul tabIndex={0} className="bg-main menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabIndex={0} className="bg-main menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
               <li>
                 <a className="justify-between">
                   Profile
                   <span className="badge">New</span>
                 </a>
               </li>
-              {userRole === 'admin' && (
-                <li><a>Dashboard</a></li>
-              )}
               <li><a>Logout</a></li>
             </ul>
             

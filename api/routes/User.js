@@ -1,7 +1,7 @@
 // Set path for the .env file which contains the key (and other variables in the future maybe?).
 // Create a file.env in the root dir, /api/file.env, then add the path as an object inside the config param like
 // require('dotenv').config({path: 'C:/User/Desktop/audit/api/file.env'}), and store the var as SECRET_KEY=randomvaluehere (only for testing)
-require('dotenv').config({path: 'C:/Users/Admin/Desktop/audit/api/file.env'});
+require('dotenv').config({path: 'C:/Users/HP/Desktop/audit/api/var.env'});
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -21,6 +21,36 @@ router.get('/', async (req, res) => {
     res.json(listAllUsers);
 });
 
+
+
+router.post('/createuser', async (req, res) => {
+    const { username, email, password, role } = req.body;
+
+    try {
+        // Check if the email is already registered
+        const existingUser = await User.findOne({ where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Email is already registered' });
+        }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create the new user
+        const newUser = await User.create({
+            username,
+            email,
+            password: hashedPassword,
+            role
+        });
+
+        // Return the newly created user
+        res.status(201).json(newUser);
+    } catch (error) {
+        console.error('Error occurred during registration', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 // Register User API Endpoint

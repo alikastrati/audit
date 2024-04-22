@@ -4,11 +4,11 @@
 require('dotenv').config({path: 'C:/Users/hp/OneDrive/Desktop/audit/api/file.env' });
 const express = require('express');
 const router = express.Router();
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const { User } = require('../models/Users');
-// const verifyToken = require('../middlewares/authMiddleware');
+const verifyToken = require('../middlewares/authMiddleware');
 
 // JWT Secret Key (Stored in .env file inside the root dir)
 const secretKey = process.env.SECRET_KEY;

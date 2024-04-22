@@ -8,6 +8,8 @@ require('dotenv').config({ path: "C:/Users/ccc/OneDrive/Desktop/audit/api/var.en
 
 
 
+
+
 // Parse JSON Requests
 app.use(express.json());
 
@@ -30,6 +32,5 @@ app.use("/auth", userRouter);
 db.sequelize.sync().then(() => {
   app.listen(3001, 'localhost', () => {
     console.log(">Listening on PORT for requests");
-    console.log(process.env.SECRET_KEY);
   })
 })

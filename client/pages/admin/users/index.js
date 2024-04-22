@@ -17,7 +17,6 @@ export default function UsersDashboard() {
   }, []);
   
   return (
-
      <div>
       <AdminHeader />
       <div className="p-4 bg-main">
@@ -36,6 +35,7 @@ export default function UsersDashboard() {
                 <tr key={user.id}>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
+                  {/* */}
                   {/* Render more user data in additional columns */}
                 </tr>
               ))}

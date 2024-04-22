@@ -3,6 +3,7 @@ const db = require('./models');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+require('dotenv').config({ path: "C:/Users/ccc/OneDrive/Desktop/audit/api/var.env " });
 
 
 
@@ -29,5 +30,6 @@ app.use("/auth", userRouter);
 db.sequelize.sync().then(() => {
   app.listen(3001, 'localhost', () => {
     console.log(">Listening on PORT for requests");
+    console.log(process.env.SECRET_KEY);
   })
 })

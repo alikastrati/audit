@@ -47,6 +47,14 @@ export default function AdminHeader() {
 
                 </li>
 
+
+                <li>
+                    <Link href='/admin/blog-dashboard'>
+                        Blog Dashboard
+                    </Link>
+
+                </li>
+
                </ul>
              </div>
             </div>

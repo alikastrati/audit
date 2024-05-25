@@ -54,6 +54,14 @@ export default function AdminHeader() {
 
                 </li>
 
+
+                <li>
+                    <Link href='/admin/pass-manager'>
+                        Password Manager
+                    </Link>
+
+                </li>
+
                </ul>
              </div>
             </div>

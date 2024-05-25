@@ -1,7 +1,21 @@
 import React from 'react'
-
-export default function AdminSettingsDashboard() {
+import AdminHeader from '@/components/AdminHeader';
+import '@/styles/globalStyles.css'; // Import globalStyles.css
+function AdminSettingsDashboard() {
   return (
-    <div>This is where the admin can change their settings</div>
+    <>
+
+      <AdminHeader />
+      <div>
+        <div className='bg-main h-screen'>
+
+          This is the profile Settings page
+        </div>
+      </div>
+    </>
+
   )
 }
+
+
+export default AdminSettingsDashboard;

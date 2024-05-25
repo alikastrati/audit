@@ -3,7 +3,7 @@ const db = require('./models');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-require('dotenv').config({ path: "C:/Users/ccc/OneDrive/Desktop/audit/api/var.env " });
+
 
 
 
